@@ -9,7 +9,7 @@ from email.mime.text import MIMEText
 # Get the smtp credentials
 settings = {}
 
-with open("./cred.txt", mode="r") as cred:
+with open("cred.txt", mode="r") as cred:
     for x in cred:
         parts = x.split("=")
         settings[parts[0]] = parts[1].strip()
@@ -25,7 +25,7 @@ def contacts():
     return email_list
 
 def read_message():
-    with open("./message.txt", mode="r") as fp:
+    with open("message.txt", mode="r") as fp:
         message = fp.read()
         
     return message
@@ -34,7 +34,7 @@ def read_message():
 if __name__ == "__main__":
     print(settings)
     # Create the smtp client
-    smtp = smtplib.SMTP(settings["HOST"], int(settings["PORT"]))
+    smtp = smtplib.SMTP_SSL(settings["HOST"], int(settings["PORT"]))
     # smtp.starttls()
     smtp.login(settings["USERNAME"], settings["PASSWORD"])
 
